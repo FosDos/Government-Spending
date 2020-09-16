@@ -32,7 +32,7 @@ app.layout = html.Div([
             sort_action="native",
             page_action="native",
             page_current= 0,
-            page_size= 10,
+            page_size= 20,
             )), width=10
             ),
             dbc.Col(html.Div("")),
