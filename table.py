@@ -8,7 +8,7 @@ import dash_bootstrap_components as dbc
 import requests;
 import json;
 import os;
-df = pd.read_csv('template.csv')
+df = pd.DataFrame(columns = ["agency_id","toptier_code","abbreviation","agency_name","congressional_justification_url","active_fy","active_fq","outlay_amount","obligated_amount","budget_authority_amount","current_total_budget_authority_amount","percentage_of_total_budget_authority"])
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MINTY])
 
 
@@ -27,7 +27,7 @@ app.layout = html.Div([
             dbc.Col(html.Div(dash_table.DataTable(
             style_table={'overflowX': 'auto'},
             id='datatable-interactivity',
-            columns=[{"name": i, "id": i, "selectable": False} for i in df.columns],
+            columns=[{"name": i, "id": i} for i in df.columns],
             data=[],
             sort_action="native",
             page_action="native",
@@ -58,16 +58,8 @@ def updateTable(n_clicks):
     URL = "https://api.usaspending.gov/api/v2/references/toptier_agencies/"
     r = requests.get(url = URL)
     data = r.json();
-    json_object = json.dumps(data["results"], indent=2)
-    file = open("temp.json", "w");
-    file.write(json_object);
-    file.close();
-    panda_object = pd.read_json("temp.json");
-    panda_object.to_csv("temp.csv");
-    pf = pd.read_csv('temp.csv');
-    os.remove('temp.csv');
-    os.remove('temp.json');
-    return [pf.to_dict('records')];
+    jo = pd.DataFrame.from_dict(data["results"]);
+    return [jo.to_dict('records')];
 
 
 if __name__ == '__main__':
