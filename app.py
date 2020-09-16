@@ -7,7 +7,6 @@ import pandas as pd
 import dash_bootstrap_components as dbc
 import requests;
 import json;
-import os;
 df = pd.DataFrame(columns = ["agency_id","toptier_code","abbreviation","agency_name","congressional_justification_url","active_fy","active_fq","outlay_amount","obligated_amount","budget_authority_amount","current_total_budget_authority_amount","percentage_of_total_budget_authority"])
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MINTY])
 
