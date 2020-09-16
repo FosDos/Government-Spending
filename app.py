@@ -10,7 +10,7 @@ import json;
 df = pd.DataFrame(columns = ["agency_id","toptier_code","abbreviation","agency_name","congressional_justification_url","active_fy","active_fq","outlay_amount","obligated_amount","budget_authority_amount","current_total_budget_authority_amount","percentage_of_total_budget_authority"])
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MINTY])
 
-
+server = app.server
 css_center_text = {"text-align": "center"}
 app.layout = html.Div([
     dbc.Row(
